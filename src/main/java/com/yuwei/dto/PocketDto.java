@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 @Data
 public class PocketDto {
+    private Long id;
 
     private String name;
 

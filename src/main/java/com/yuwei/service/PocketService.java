@@ -36,6 +36,7 @@ public class PocketService {
         return pockets.stream().map(pocket -> {
             PocketDto dto = new PocketDto();
 
+            dto.setId(pocket.getId());
             dto.setName(pocket.getName());
             dto.setCurrentAmount(pocket.getCurrentAmount());
             dto.setTargetAmount(pocket.getTargetAmount());
@@ -54,5 +55,21 @@ public class PocketService {
 
             return dto;
         }).toList();
+    }
+
+    public Pocket update(Long id, PocketDto pocketDto) {
+        Pocket pocket = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("荷包不存在"));
+
+        pocket.setName(pocketDto.getName());
+        pocket.setCurrentAmount(pocketDto.getCurrentAmount());
+        pocket.setTargetAmount(pocketDto.getTargetAmount());
+        pocket.setIcon(pocketDto.getIcon());
+
+        return repository.save(pocket);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }
