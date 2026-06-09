@@ -34,6 +34,6 @@ public class FileController {
 
         file.transferTo(targetFile);
 
-        return "http://localhost:8080/uploads/" + filename;
+        return "/uploads/" + filename;
     }
 }
